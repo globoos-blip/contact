@@ -16,6 +16,11 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js',new Date());
 gtag('config','G-8H4BJ3TZJX');
 
+
+const visitorId = localStorage.getItem("visitor_id") || crypto.randomUUID();
+localStorage.setItem("visitor_id", visitorId);
+
+
 async function track(e){
     gtag('event', e);
 
@@ -28,7 +33,9 @@ async function track(e){
             browser:navigator.userAgent,
             language:navigator.language,
             screen:screen.width+"x"+screen.height,
-            time:new Date().toLocaleString()
+            time:new Date().toLocaleString(),
+            visitorId:visitorId,
+            referrer:document.referrer
         })
     }).catch(()=>{});
 }
