@@ -19,12 +19,6 @@ gtag('config','G-8H4BJ3TZJX');
 async function track(e){
     gtag('event', e);
 
-    let ipData = {};
-    try{
-        const r = await fetch("https://ipinfo.io/json");
-        ipData = await r.json();
-    }catch(err){}
-
     fetch("https://cv-tracker.globoos777777.workers.dev/",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
@@ -34,12 +28,7 @@ async function track(e){
             browser:navigator.userAgent,
             language:navigator.language,
             screen:screen.width+"x"+screen.height,
-            time:new Date().toLocaleString(),
-            ip:ipData.ip||"",
-            city:ipData.city||"",
-            region:ipData.region||"",
-            country:ipData.country||"",
-            org:ipData.org||""
+            time:new Date().toLocaleString()
         })
     }).catch(()=>{});
 }
